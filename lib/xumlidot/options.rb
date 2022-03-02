@@ -41,7 +41,7 @@ module Xumlidot
       ENV.delete('XUMLIDOT_DEBUG')
 
       opt_parser = OptionParser.new do |opts|
-        opts.banner = 'Usage: xumlidot.rb [options]'
+        opts.banner = 'Usage: xumlidot.rb [options] src_folder ...'
 
         opts.separator ''
         opts.separator 'Specific options:'
@@ -109,6 +109,12 @@ module Xumlidot
       end
 
       opt_parser.parse!(args)
+      
+      if args.empty?
+          puts("missing source folder")
+          puts(opt_parser)
+          exit
+      end
 
       # Rather than pass the options around everywhere, lets set it as a class instance var
       # TODO: Remove code passing it around everywhere
